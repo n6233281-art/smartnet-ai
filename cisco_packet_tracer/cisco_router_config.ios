@@ -1,0 +1,56 @@
+! =====================================================================
+! Cisco Packet Tracer - Router Configuration (Router R1 - Cisco 2911 / 1941)
+! SmartNet AI Enterprise Gateway Configuration
+! Subnet: 192.168.1.0/24, Default Gateway: 192.168.1.1
+! =====================================================================
+
+enable
+configure terminal
+hostname R1-Gateway
+
+! Set console and privileged exec passwords
+enable secret class
+line console 0
+ password cisco
+ login
+ exit
+
+! Configure FastEthernet / Gigabit Interfaces
+interface GigabitEthernet0/0
+ description Link to Access Switch SW1 (Sales LAN)
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+ no shutdown
+ exit
+
+interface GigabitEthernet0/1
+ description Link to Core Switch SW2 (Server LAN)
+ ip address 192.168.2.1 255.255.255.0
+ duplex auto
+ speed auto
+ no shutdown
+ exit
+
+! Enable IP Routing
+ip routing
+
+! DHCP Pool Configuration for Auto-Addressing (Optional)
+ip dhcp excluded-address 192.168.1.1 192.168.1.9
+ip dhcp excluded-address 192.168.1.100
+
+ip dhcp pool SMARTNET_SALES
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 192.168.1.100
+ exit
+
+! Access Control List for Anomaly Mitigation (Lab Safe Drop Rule)
+access-list 101 permit tcp any any established
+access-list 101 permit ip 192.168.1.0 0.0.0.255 any
+access-list 101 deny tcp host 45.33.32.156 any
+access-list 101 permit icmp any any echo-reply
+
+! Save running config
+end
+write memory

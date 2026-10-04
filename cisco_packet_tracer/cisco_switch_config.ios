@@ -1,0 +1,73 @@
+! =====================================================================
+! Cisco Packet Tracer - Switch Configuration (Switch SW1 & SW2 - Cisco Catalyst 2960)
+! SmartNet AI Layer 2 LAN Switch Configuration
+! =====================================================================
+
+! --- SWITCH 1 (Sales Department) ---
+enable
+configure terminal
+hostname SW1-Sales
+
+interface FastEthernet0/1
+ description Workstation PC1 Link
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation restrict
+ spanning-tree portfast
+ no shutdown
+ exit
+
+interface FastEthernet0/2
+ description Workstation PC2 Link
+ switchport mode access
+ switchport port-security
+ spanning-tree portfast
+ no shutdown
+ exit
+
+interface GigabitEthernet0/1
+ description Uplink to R1 Gateway
+ switchport mode access
+ no shutdown
+ exit
+
+end
+write memory
+
+! --- SWITCH 2 (Server Farm & Workstations) ---
+enable
+configure terminal
+hostname SW2-Servers
+
+interface FastEthernet0/1
+ description Workstation PC3 Link
+ switchport mode access
+ spanning-tree portfast
+ no shutdown
+ exit
+
+interface FastEthernet0/2
+ description Workstation PC4 Link
+ switchport mode access
+ spanning-tree portfast
+ no shutdown
+ exit
+
+interface GigabitEthernet0/2
+ description Enterprise Web/DNS Server SRV1
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+ no shutdown
+ exit
+
+interface GigabitEthernet0/1
+ description Uplink to R1 Gateway
+ switchport mode access
+ no shutdown
+ exit
+
+end
+write memory

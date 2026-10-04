@@ -1,0 +1,6 @@
+{
+  "name": "SmartNet AI",
+  "description": "AI-Powered Smart Network Traffic Analyzer and Anomaly Detection System with Cisco Packet Tracer simulation and ML congestion forecasting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

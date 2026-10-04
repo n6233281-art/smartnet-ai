@@ -1,0 +1,11 @@
+Packet_ID,Time_Offset_s,Source_Device,Source_IP,Dest_Device,Dest_IP,Type,Layer_4_Protocol,Port,Size_Bytes,Description
+1,0.000,PC1,192.168.1.10,Server1,192.168.1.100,ICMP,N/A,0,64,Ping Request PDU across Switch1 to Switch2 to Server1
+2,0.003,Server1,192.168.1.100,PC1,192.168.1.10,ICMP,N/A,0,64,Ping Reply Echo PDU forwarded across switches
+3,0.015,PC2,192.168.1.11,Server1,192.168.1.100,TCP,TCP,80,60,HTTP SYN Connection Handshake Init
+4,0.018,Server1,192.168.1.100,PC2,192.168.1.11,TCP,TCP,49153,60,HTTP SYN-ACK Response from Server Web Service
+5,0.021,PC2,192.168.1.11,Server1,192.168.1.100,TCP,TCP,80,54,HTTP ACK Handshake Completion
+6,0.025,PC2,192.168.1.11,Server1,192.168.1.100,HTTP,TCP,80,512,GET /index.html HTTP Request PDU
+7,0.038,PC3,192.168.1.20,Router1,192.168.1.1,DNS,UDP,53,88,DNS query resolving gateway domain
+8,0.042,Router1,192.168.1.1,PC3,192.168.1.20,DNS,UDP,53200,112,DNS response from local gateway caching DNS
+9,0.055,PC4,192.168.1.21,Server1,192.168.1.100,TCP,TCP,445,64,SMB session setup probe
+10,0.070,PC4,192.168.1.21,Server1,192.168.1.100,UDP,UDP,161,128,SNMP monitoring query
